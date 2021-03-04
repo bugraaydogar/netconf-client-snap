@@ -12,18 +12,11 @@ description: |
 grade: stable
 confinement: strict
 
-plugs:
-  config-netconf-client:
-    interface: system-files
-    read:
-    - /etc/host.conf
-
 apps:
   netconf-client:
-    command: bin/checks $SNAP/bin/netconf-client
+    command: bin/netconf-client
     plugs:
     - network
-    - config-netconf-client
 
 parts:
   netconf-client:
@@ -37,11 +30,9 @@ parts:
       - paramiko>=1.10.1
       - sshutil>=1.5.0
   
-  init-checks:
+
+  config-files:
     plugin: dump
-    source: scripts
+    source: config
     organize:
-      checks.sh: bin/checks
-    override-build: |
-      snapcraftctl build
-      rm -rf $SNAPCRAFT_PART_INSTALL/lib64
+      host.conf: etc/host.conf
