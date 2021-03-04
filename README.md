@@ -18,3 +18,11 @@ You can build the snap using an lxd container with the following command.
     snapcraft --use-lxd
     
  
+
+## Testing
+
+If you don't have any NETCONF server to connect with, there is also a server exampe taken from https://github.com/choppsv1/netconf/tree/master/example
+feel free to use it as a server application. After installing dependencies.
+
+    python system-server --username=USERNAME --password=PASSWORD port=PORT
+    netconf-client --username=USERNAME --password=PASSWORD port=PORT --get-config
